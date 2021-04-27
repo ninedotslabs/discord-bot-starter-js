@@ -1,7 +1,9 @@
-const Discord = require("discord.js")
-const fetch = require("node-fetch")
+import Discord from "discord.js"
+import fetch from "node-fetch"
+import dotenv from "dotenv"
+
+dotenv.config()
 const client = new Discord.Client()
-require('dotenv').config()
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`)

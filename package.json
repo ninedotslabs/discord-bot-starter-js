@@ -1,22 +1,54 @@
 {
   "name": "discord-bot-starter",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "discord bot starter",
+  "main": "main.js",
   "scripts": {
-    "start": "node src/main.js",
-    "dev": "nodemon src/main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "transpile": "babel ./src --out-dir devDist --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "cleanDev": "rimraf devDist",
+    "cleanProd": "rimraf dist/*.js",
+    "clean": "npm-run-all cleanDev cleanProd",
+    "minify": "uglifyjs-folder devDist -eo dist -x .js",
+    "build": "npm-run-all cleanDev transpile",
+    "buildProd": "NODE_ENV=production npm-run-all build cleanProd minify cleanDev",
+    "watch:dev": "nodemon",
+    "devServer": "node devDist/main.js",
+    "prodServer": "node dist/main.js",
+    "dev": "NODE_ENV=development npm-run-all build devServer",
+    "prod": "NODE_ENV=production npm-run-all buildProd prodServer",
+    "start": "npm run dev"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bot",
+    "discord"
+  ],
+  "author": "ahdyt",
+  "license": "MIT",
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "nodemon": "^2.0.7",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "uglify-js": "^3.13.4",
+    "uglifyjs-folder": "^2.0.0"
+  },
+  "nodemonConfig": {
+    "exec": "npm run dev",
+    "watch": [
+      "src/*"
+    ],
+    "ignore": [
+      "**/__tests__/**",
+      "*.test.js",
+      "*.spec.js"
+    ]
   }
 }

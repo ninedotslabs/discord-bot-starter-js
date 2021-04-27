@@ -14,6 +14,16 @@ Dependencies:
 - node-fetch -> enable fetch in nodejs
 - dotenv -> get env mechanism by .env file
 
+DevDependencies:
+- babel -> js es6 transpiler
+- nodemon -> nodejs file changes watcher
+- npm-run-all -> run all npm scripts simultaneously
+- rimraf -> nodejs folder remover (rm -rf)
+- uglifyjs(uglify-js) -> minify js
+- uglifyjs-folder -> minify js in a folder
+
+Dependencies:
+
 don't forget to set token, by
 
 ```
@@ -29,24 +39,29 @@ you can get bot TOKEN from https://discord.com/developers/applications by making
 for development, run
 
 ```
-$ npm run dev
+$ npm run watch:dev
 ```
 
 this will start nodemon as watcher, so we can conveniently change and then it's automatically updated without kill the process.
 
-
 # Prod
 
-for production, just run
+just build
 
 ```
-$ npm start
+$ npm run buildProd
+```
+
+build and run
+
+```
+$ npm run prod
 ```
 
 or you know what todo right?
 
-
 # TODOs
 
-- enable es6 or above with help of babel.
-- as es6 or above is enabled, the code must be converted to nodejs compatible and minified for standard production use, so there will be dist or build folder.
+- MVP(Minimum Viable Product). [DONE]
+- enable es6 or above with help of babel.[DONE]
+- as es6 or above is enabled, the code must be converted to nodejs compatible and minified for standard production use, so there will be dist or build folder.[DONE]
